@@ -1,0 +1,26 @@
+{
+  "name": "cliock",
+  "version": "1.0.0",
+  "description": "simple CLI for clockify",
+  "main": "/bin/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "bin": {
+    "iok": "./bin/index.js",
+    "cliock": "./bin/index.js"
+  },
+  "keywords": [
+    "CLI",
+    "clockify",
+    "simple",
+    "time",
+    "productivity"
+  ],
+  "author": "Jared Gold",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}
