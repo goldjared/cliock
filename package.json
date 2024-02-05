@@ -2,14 +2,14 @@
   "name": "cliock",
   "version": "1.0.0",
   "description": "simple CLI for clockify",
-  "main": "/bin/index.js",
+  "main": "./bin/index.js",
   "scripts": {
+    "build": "npx tsc",
+    "dev": "ts-node src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "type": "module",
   "bin": {
-    "iok": "./bin/index.js",
-    "cliock": "./bin/index.js"
+    "iok": "./bin/index.js"
   },
   "keywords": [
     "CLI",
@@ -21,6 +21,7 @@
   "author": "Jared Gold",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^20.11.16",
     "typescript": "^5.3.3"
   }
 }

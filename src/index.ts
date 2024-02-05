@@ -1,14 +1,9 @@
-#!/usr/bin/env npx ts-node --esm
-console.log("executed worked");
+#!/usr/bin/env node
 
-type Person = {
-	name: string;
-	age: number;
-};
+import { processor } from './commands/cmdProcessor'
 
-const newPerson: Person = {
-	name: "Sarah",
-	age: 23,
-};
+processor();
 
-console.log(newPerson.name);
+
+
+
