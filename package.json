@@ -6,8 +6,8 @@
   "scripts": {
     "build": "npx tsc",
     "lint": "eslint --ignore-path .eslintignore --ext .js,.ts",
-    "format": "prettier --ignore-path .prettierignore --write \"**/*.+(js|ts|json)\"",
-    "dev": "ts-node src/index.ts",
+    "format": "prettier --ignore-path .eslintignore --write \"**/*.+(js|ts|json)\"",
+    "dev": "npx ts-node src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
@@ -24,14 +24,11 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.11.16",
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "@typescript-eslint/parser": "^6.21.0",
     "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-config-standard-with-typescript": "^43.0.1",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-n": "^16.6.2",
-    "eslint-plugin-promise": "^6.1.1",
     "prettier": "^3.2.5",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   }
 }
