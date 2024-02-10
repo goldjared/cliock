@@ -6,6 +6,7 @@
   "scripts": {
     "build": "npx tsc",
     "lint": "eslint --ignore-path .eslintignore --ext .js,.ts",
+    "lint-and-fix": "eslint . --ext .ts --fix",
     "format": "prettier --ignore-path .eslintignore --write \"**/*.+(js|ts|json)\"",
     "dev": "npx ts-node src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -1,3 +1,5 @@
 # cliock
-simple CLI for clockify.
+Simple CLI for Clockify.
+
+
 
