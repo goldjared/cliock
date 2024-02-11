@@ -1,26 +1,28 @@
-import { argv } from 'node:process';
-import { login } from './login'
+import { argv } from "node:process";
+import { login } from "./login";
+import { isValid } from "./validCmds";
 
-// print process.argv
-const processor = () => {
-/*
-argv.forEach((val, index) => {
-  console.log(`${index}: ${val}`);
-  if(val === 'login') {
-        
+const processor = (api: string): void => {
+  if (argv[2] === undefined) {
+    console.log("No command input. Type 'iok help'");
+    return;
   }
-});
-*/
-  const command : string = argv[2]; 
-  // if there is only 1 input, and input is valid command, display help for said cmd
-  if(argv.length === 3) {
+  if (api === "api") {
+    // call method to validate API. return
+    const apiKey: string = argv[2];
+    console.log(apiKey, " yo");
+  }
+  const command: string = argv[2].toLowerCase();
+  if (!isValid(command)) {
+    console.log(`Invalid command '${command}'. Type 'iok help'`);
+    return;
+  }
+  const inputArr: string[] = argv.slice(3);
 
-  }
-  if(command === "login") {
+  if (command === "login") {
     // validate the argv array for the matching command
-    validate(argv, command);
-    login(argv[2], argv[3]);
+    login(inputArr);
   }
-}
+};
 
-export { processor } 
+export { processor };
