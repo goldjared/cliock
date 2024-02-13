@@ -11,7 +11,10 @@ interface ApiValid {
 }
 
 interface UserProfile {
+  id: string;
   name: string;
+  activeWorkspace: string;
+  defaultWorkspace: string;
 }
 
 interface ReqOptions {
@@ -36,7 +39,14 @@ const clockifyResponse = async (
     const response = await fetch(url, reqOptions);
     const data = await response.json();
 
-    return data;
+    const userProfile: UserProfile = {
+      id: data.id,
+      name: data.name,
+      activeWorkspace: data.activeWorkspace,
+      defaultWorkspace: data.defaultWorkspace,
+  }
+    return userProfile;
+
   } catch (error) {
     console.log("Error fetching data: ", error);
     throw error;
