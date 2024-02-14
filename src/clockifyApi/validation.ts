@@ -3,19 +3,19 @@ interface ApiInvalid {
   code: number;
 }
 
-interface ApiValid {
-  timestamp: string;
-  status: number;
-  error: string;
-  path: string;
-}
-
 interface UserProfile {
   id: string;
   name: string;
   activeWorkspace: string;
   defaultWorkspace: string;
 }
+
+interface Project {
+  id: string;
+  name: string;
+  workspaceId: string;
+}
+interface ProjectList extends Array<Project> {}
 
 interface ReqOptions {
   method: string;
@@ -34,19 +34,12 @@ const genReqOptions = (apiKey: string): ReqOptions => {
 const clockifyResponse = async (
   url: string,
   reqOptions: ReqOptions
-): Promise<ApiValid | ApiInvalid | UserProfile> => {
+): Promise<ApiInvalid | UserProfile | Project | ProjectList> => {
   try {
     const response = await fetch(url, reqOptions);
     const data = await response.json();
 
-    const userProfile: UserProfile = {
-      id: data.id,
-      name: data.name,
-      activeWorkspace: data.activeWorkspace,
-      defaultWorkspace: data.defaultWorkspace,
-  }
-    return userProfile;
-
+    return data;
   } catch (error) {
     console.log("Error fetching data: ", error);
     throw error;
@@ -54,4 +47,4 @@ const clockifyResponse = async (
 };
 
 export { clockifyResponse, genReqOptions };
-export type { UserProfile, ApiValid, ApiInvalid };
+export type { UserProfile, ApiInvalid, Project, ProjectList };
