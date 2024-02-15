@@ -1,4 +1,5 @@
 import { clockifyResponse, genReqOptions } from "../clockifyApi/validation";
+import { readData, writeData } from "../sys/fileOps";
 import type {
   UserProfile,
   ApiInvalid,
@@ -31,8 +32,6 @@ const login = (apiKey: string): void => {
         };
         // writeApi(JSON.stringify(userData));
         //        dataToWrite.push(userData);
-        console.log(userData, "USERDATA");
-        //        console.log(data);
         console.log(
           `Key authenticated. '${data.name}' Logged in successfully.`
         );
@@ -44,11 +43,9 @@ const login = (apiKey: string): void => {
         )
           .then((data: ApiInvalid | UserProfile | Project | ProjectList) => {
             // data is the array of project objects
-            let counter: number = 0;
             if (Array.isArray(data)) {
               const projList: ProjectList = [];
               for (const proj of data) {
-                console.log(counter++);
                 const currentProj = {
                   name: proj.name,
                   id: proj.id,
@@ -56,7 +53,8 @@ const login = (apiKey: string): void => {
                 };
                 projList.push(currentProj);
               }
-              console.log(projList, "TEST");
+              const mergedJson = Object.assign({}, projList, userData);
+              writeData(JSON.stringify(mergedJson));
             }
           })
           .catch((error) => {
