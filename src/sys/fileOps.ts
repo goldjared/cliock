@@ -2,7 +2,7 @@ const fs = require("fs");
 const os = require("os");
 const homeDir: string = os.homedir();
 
-const writeApi = (content: string): boolean => {
+const writeData = (content: string): boolean => {
   fs.writeFile(homeDir + "/.cliock", content, (err: unknown) => {
     if (err) {
       console.error(err);
@@ -14,4 +14,13 @@ const writeApi = (content: string): boolean => {
   return true;
 };
 
-export { fs, os, homeDir, writeApi };
+const readData = (): void => {
+  fs.readFile(homeDir + "/.cliock", "utf8", (err: unknown, data: string) => {
+    if (err) {
+      console.log("Read error.");
+      return;
+    }
+    return data;
+  });
+};
+export { fs, os, homeDir, writeData, readData };
