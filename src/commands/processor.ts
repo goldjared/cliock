@@ -1,9 +1,30 @@
 import { argv } from "node:process";
 import { login } from "./login";
 import { isValid } from "./validCmds";
+import {
+  Project,
+  ProjectList,
+  UserData,
+  UserProfile,
+} from "../clockifyApi/validation";
 
-const processor = (api: string): void => {
-  // API input will either be empty string or a key.
+const processor = (userData: string): void => {
+  // check if userData (.cliock file) is not empty
+  let userDataJson: UserData;
+  let api: string;
+  let userProfile: UserProfile;
+  let userCurrentWorkspaceProjects: ProjectList;
+  if (userData !== "") {
+    // convert string into json obj
+    userDataJson = JSON.parse(userData);
+
+    api = userDataJson.api;
+    // console.log(api)
+    userProfile = userDataJson.userProfile;
+    // console.log(userProfile);
+    userCurrentWorkspaceProjects = userDataJson.projects;
+    // console.log(userCurrentWorkspaceProjects);
+  }
 
   if (argv[2] === undefined) {
     console.log("No command input. Type 'iok help'");
@@ -15,8 +36,8 @@ const processor = (api: string): void => {
     console.log(`Invalid command '${command}'. Type 'iok help'`);
     return;
   }
+
   const inputArr: string[] = argv.slice(3);
-  // for login, this may be redundant. maybe all login can go in api==='api'.
   if (command === "login") {
     login(inputArr[0]);
   } // end login command
