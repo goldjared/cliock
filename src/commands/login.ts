@@ -1,22 +1,16 @@
 import { clockifyResponse, genReqOptions } from "../clockifyApi/validation";
-import { readData, writeData } from "../sys/fileOps";
+import { writeData } from "../sys/fileOps";
 import type {
   UserProfile,
   ApiInvalid,
   Project,
   ProjectList,
+  UserData,
 } from "../clockifyApi/validation";
 
 const userUrl: string = "https://api.clockify.me/api/v1/user";
 const getWorkspaceProjectsUrl = (wrkspcId: string): string =>
   `https://api.clockify.me/api/v1/workspaces/${wrkspcId}/projects`;
-
-// interface of json structure that will be written to file
-interface UserData {
-  projects?: ProjectList | null;
-  api: string;
-  userProfile: UserProfile;
-}
 
 const login = (apiKey: string): void => {
   clockifyResponse(userUrl, genReqOptions(apiKey))
