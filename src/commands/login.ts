@@ -25,7 +25,7 @@ const login = (apiKey: string): void => {
         };
 
         const userData: UserData = {
-          projects: null,
+          projects: [],
           api: apiKey,
           userProfile,
         };
