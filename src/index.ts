@@ -9,8 +9,11 @@ fs.readFile(homeDir + "/.cliock", "utf8", (err: unknown, data: string) => {
     console.log("Set up complete. Type 'iok login <Clockify_API_key_here>'");
     return;
   }
-  // file exists, get data from file, call processor with data
-  let api: string = data;
-  api = api.slice(0, -1);
-  processor(api);
+  if (data === "") {
+    processor("");
+    return;
+  }
+
+  const userData: string = data;
+  processor(userData);
 });
