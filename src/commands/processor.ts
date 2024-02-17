@@ -1,8 +1,7 @@
 import { argv } from "node:process";
 import { login } from "./login";
 import { isValid } from "./validCmds";
-import {
-  Project,
+import type {
   ProjectList,
   UserData,
   UserProfile,
