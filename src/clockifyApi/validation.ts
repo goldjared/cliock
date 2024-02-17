@@ -19,7 +19,7 @@ interface ProjectList extends Array<Project> {}
 
 // interface of json structure that will be written to file on login attempts
 interface UserData {
-  projects?: ProjectList | null;
+  projects: ProjectList;
   api: string;
   userProfile: UserProfile;
 }
