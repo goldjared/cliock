@@ -14,13 +14,15 @@ const writeData = (content: string): boolean => {
   return true;
 };
 
-const readData = (): void => {
+const readData = (): string => {
+  let stringData: string = "";
   fs.readFile(homeDir + "/.cliock", "utf8", (err: unknown, data: string) => {
     if (err) {
       console.log("Read error.");
       return;
     }
-    return data;
+    stringData = data;
   });
+  return stringData;
 };
 export { fs, os, homeDir, writeData, readData };
