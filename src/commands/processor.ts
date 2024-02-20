@@ -3,8 +3,8 @@ import { login } from "./login";
 import { isValid } from "./validCmds";
 import type {
   ProjectList,
-  UserData,
   UserProfile,
+  UserData,
 } from "../clockifyApi/validation";
 
 const processor = (userData: string): void => {
@@ -22,7 +22,7 @@ const processor = (userData: string): void => {
     userProfile = userDataJson.userProfile;
     // console.log(userProfile);
     userCurrentWorkspaceProjects = userDataJson.projects;
-    // console.log(userCurrentWorkspaceProjects);
+    console.log(userCurrentWorkspaceProjects);
   }
 
   if (argv[2] === undefined) {
@@ -39,7 +39,9 @@ const processor = (userData: string): void => {
   const inputArr: string[] = argv.slice(3);
   if (command === "login") {
     login(inputArr[0]);
-  } // end login command
+  } else if (command === "start") {
+    
+  }
 };
 
 export { processor };
