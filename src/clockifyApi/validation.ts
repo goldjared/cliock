@@ -17,11 +17,19 @@ interface Project {
 }
 interface ProjectList extends Array<Project> {}
 
+interface Timer {
+  projectId: string;
+  projectName: string;
+  start: string;
+  end: string;
+}
+
 // interface of json structure that will be written to file on login attempts
 interface UserData {
   projects: ProjectList;
   api: string;
   userProfile: UserProfile;
+  timer: Timer;
 }
 
 interface ReqOptions {
@@ -54,4 +62,4 @@ const clockifyResponse = async (
 };
 
 export { clockifyResponse, genReqOptions };
-export type { UserProfile, UserData, ApiInvalid, Project, ProjectList };
+export type { UserProfile, UserData, ApiInvalid, Project, ProjectList, Timer };
