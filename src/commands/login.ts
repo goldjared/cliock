@@ -29,6 +29,13 @@ const login = (apiKey: string): void => {
           projects: [],
           api: apiKey,
           userProfile,
+          // set empty timer to userData.timer
+          timer: {
+            projectId: "",
+            projectName: "",
+            start: "",
+            end: "",
+          },
         };
         console.log(
           `Key authenticated. '${data.name}' Logged in successfully.`
@@ -52,13 +59,6 @@ const login = (apiKey: string): void => {
               }
               // set projectList obj to userData.projects
               userData.projects = { ...projList };
-              // set empty timer to userData.timer
-              userData.timer = {
-                projectId: "",
-                projectName: "",
-                start: "",
-                end: "",
-              };
               writeData(JSON.stringify(userData));
             }
           })
