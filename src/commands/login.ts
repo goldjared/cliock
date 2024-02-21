@@ -6,6 +6,7 @@ import type {
   Project,
   ProjectList,
   UserData,
+  Timer,
 } from "../clockifyApi/validation";
 
 const userUrl: string = "https://api.clockify.me/api/v1/user";
@@ -49,7 +50,15 @@ const login = (apiKey: string): void => {
                 };
                 projList.push(currentProj);
               }
+              // set projectList obj to userData.projects
               userData.projects = { ...projList };
+              // set empty timer to userData.timer
+              userData.timer = {
+                projectId: "",
+                projectName: "",
+                start: "",
+                end: "",
+              };
               writeData(JSON.stringify(userData));
             }
           })
