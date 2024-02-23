@@ -33,13 +33,19 @@ const getProjectId = (projectName: string): string => {
 
 const getUTCTimeNow = (): string => {
   const date = new Date();
-  const year = date.getUTCFullYear();
-  const month = date.getUTCMonth();
-  const day = date.getUTCDate();
-  const hours = date.getUTCHours();
-  const minutes = date.getUTCMinutes();
-  const seconds = date.getUTCSeconds();
+  const year: string = date.getUTCFullYear().toString();
+  let month: string = date.getUTCMonth().toString();
+  let day: string = date.getUTCDate().toString();
+  let hours: string = date.getUTCHours().toString();
+  let minutes: string = date.getUTCMinutes().toString();
+  let seconds: string = date.getUTCSeconds().toString();
+
   // yyyy-MM-ddThh:mm:ssZ
+  if(month.length < 2) month = "0" + month;
+  if(day.length < 2) day = "0" + day;
+  if(hours.length < 2) hours = "0" + hours;
+  if(minutes.length < 2) minutes = "0" + minutes;
+  if(seconds.length < 2) seconds = "0" + seconds;
   return (
     year +
     "-" +
