@@ -46,6 +46,15 @@ const genReqOptions = (apiKey: string): ReqOptions => {
   };
 };
 
+const genPostReqOptions = (apiKey: string): ReqOptions => {
+  return {
+    method: "POST",
+    headers: {
+      "X-Api-Key": apiKey,
+    },
+  };
+};
+
 const clockifyResponse = async (
   url: string,
   reqOptions: ReqOptions
@@ -61,5 +70,5 @@ const clockifyResponse = async (
   }
 };
 
-export { clockifyResponse, genReqOptions };
+export { clockifyResponse, genReqOptions, genPostReqOptions };
 export type { UserProfile, UserData, ApiInvalid, Project, ProjectList, Timer };
