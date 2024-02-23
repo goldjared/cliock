@@ -1,5 +1,9 @@
 import { readData, writeData } from "../sys/fileOps";
-import type { UserData } from "../clockifyApi/validation";
+import {
+  clockifyResponse,
+  genPostReqOptions,
+  type UserData,
+} from "../clockifyApi/validation";
 
 const getWorkspaceTimeUrl = (wrkspcId: string): string =>
   `https://api.clockify.me/api/v1/workspaces/${wrkspcId}/time-entries`;
@@ -63,9 +67,26 @@ const stop = (): void => {
   const userData: string = readData();
   const userDataJson: UserData = JSON.parse(userData);
   userDataJson.timer.end = getUTCTimeNow();
-  // send the POST request with the timer.
-  // set .timer to blank values, then write it to file.
-  writeData(JSON.stringify());
+
+  const workspaceTimeUrl = getWorkspaceTimeUrl(
+    userDataJson.userProfile.activeWorkspace
+  );
+  // send with URL link, and req options made with API.
+
+  clockifyResponse(workspaceTimeUrl, genPostReqOptions(userDataJson.api))
+    .then((data) => {
+      console.log(`Suxcess.`);
+      console.log(data);
+    })
+    .catch((error) => {
+      // Handle any errors that occurred during the execution
+      console.error("Error:", error);
+    });
+
+  userDataJson.timer.start = "";
+  userDataJson.timer.end = "";
+  writeData(JSON.stringify(userDataJson));
+  console.log("file rewritten with timer start, end reset!");
 };
 
 export { getProjectId, start, stop };
