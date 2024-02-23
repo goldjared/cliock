@@ -3,22 +3,31 @@ import {
   clockifyResponse,
   genPostReqOptions,
   type UserData,
+  type ProjectList,
 } from "../clockifyApi/validation";
 
 const getWorkspaceTimeUrl = (wrkspcId: string): string =>
   `https://api.clockify.me/api/v1/workspaces/${wrkspcId}/time-entries`;
 
 const getProjectId = (projectName: string): string => {
-  if (readData() === "") {
-    // display start up message
+  const data = readData();
+  if (data === "") {
     console.log("No saved data found. Creating file...");
     return "";
   }
-  const userData: string = readData();
+
+  const userData: string = data;
   const userDataJson: UserData = JSON.parse(userData);
-  for (const proj of userDataJson.projects) {
-    if (proj.name === projectName) return proj.id;
+
+  const projList: ProjectList = userDataJson.projects;
+  const projListLength: number = Object.keys(projList).length;
+
+  // iterate through project list, return proj ID if name param exists in projList
+  for (let i = 0; i < projListLength; i++) {
+    if (projList[i].name === projectName) return projList[i].id;
   }
+
+  // projName/ID does not exist. Return blank string
   return "";
 };
 
@@ -48,31 +57,51 @@ const getUTCTimeNow = (): string => {
 };
 
 const start = (projectName: string, projectId: string): void => {
-  const userData: string = readData();
+  const data = readData();
+  if (data === "") {
+    console.log("No saved data found. Creating file...");
+    return;
+  }
+
+  const userData: string = data;
   const userDataJson: UserData = JSON.parse(userData);
+
   userDataJson.timer = {
     projectId,
     projectName,
     start: getUTCTimeNow(),
     end: "",
   };
+  writeData(JSON.stringify(userDataJson));
+  console.log("file rewritten with timer start, end reset!");
+};
+
+const isTimerRunning = (): boolean => {
+  const data = readData();
+  if (data === "") {
+    console.log("No saved data found. Creating file...");
+    return false;
+  }
+  const userData: string = data;
+  const userDataJson: UserData = JSON.parse(userData);
+  return userDataJson.timer.start !== "";
 };
 
 const stop = (): void => {
-  if (readData() === "") {
-    // display start up message
+  const data = readData();
+  if (data === "") {
     console.log("No saved data found. Creating file...");
     return;
   }
-  const userData: string = readData();
+  const userData: string = data;
   const userDataJson: UserData = JSON.parse(userData);
   userDataJson.timer.end = getUTCTimeNow();
 
   const workspaceTimeUrl = getWorkspaceTimeUrl(
     userDataJson.userProfile.activeWorkspace
   );
-  // send with URL link, and req options made with API.
 
+  // send with URL link, and req options made with API.
   clockifyResponse(workspaceTimeUrl, genPostReqOptions(userDataJson.api))
     .then((data) => {
       console.log(`Suxcess.`);
@@ -89,4 +118,4 @@ const stop = (): void => {
   console.log("file rewritten with timer start, end reset!");
 };
 
-export { getProjectId, start, stop };
+export { getProjectId, start, stop, isTimerRunning };
