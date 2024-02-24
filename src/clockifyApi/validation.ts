@@ -78,7 +78,7 @@ const genPostReqOptions = (apiKey: string, data: string): PostReqOptions => {
 
 const clockifyResponse = async (
   url: string,
-  reqOptions: ReqOptions
+  reqOptions: ReqOptions | PostReqOptions
 ): Promise<ApiInvalid | UserProfile | Project | ProjectList> => {
   try {
     const response = await fetch(url, reqOptions);
