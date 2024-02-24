@@ -6,7 +6,6 @@ import type {
   Project,
   ProjectList,
   UserData,
-  Timer,
 } from "../clockifyApi/validation";
 
 const userUrl: string = "https://api.clockify.me/api/v1/user";
@@ -31,10 +30,16 @@ const login = (apiKey: string): void => {
           userProfile,
           // set empty timer to userData.timer
           timer: {
-            projectId: "",
-            projectName: "",
-            start: "",
+            billable: false,
+            customAttributes: [],
+            customFields: [],
+            description: "",
             end: "",
+            projectId: "",
+            start: "",
+            tagIds: [],
+            taskId: "",
+            type: "REGULAR",
           },
         };
         console.log(
