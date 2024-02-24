@@ -6,7 +6,7 @@ import type {
   UserProfile,
   UserData,
 } from "../clockifyApi/validation";
-import { getProjectId, start } from "./timer";
+import { getProjectId, isTimerRunning, start, stop } from "./timer";
 
 const processor = (userData: string): void => {
   // check if userData (.cliock file) is not empty
@@ -41,15 +41,24 @@ const processor = (userData: string): void => {
   if (command === "login") {
     login(inputArr[0]);
   } else if (command === "start") {
-    const projectName: string = inputArr.join(' ');
+    const projectName: string = inputArr.join(" ");
+
     // will either be projectID or blank string
     const projectId: string = getProjectId(projectName);
-    if(projectId === "") {
+
+    if (projectId === "") {
       console.log(`Invalid project name '${projectName}'. Exiting`);
     }
-    start(projectName, projectId);
+    start(projectId);
+    console.log("Timer started on project: '" + projectName + "'");
   } else if (command === "stop") {
-    
+    if (!isTimerRunning()) {
+      console.log("No timer currently running. Exiting");
+      return;
+    }
+    stop();
+    const projectName: string = inputArr.join(" ");
+    console.log("Timer stopped on project: '" + projectName + "'");
   }
 };
 
