@@ -24,12 +24,25 @@ interface Timer {
   end: string;
 }
 
+interface TimeEntryRequest {
+  billable: boolean;
+  customAttributes?: unknown[];
+  customFields?: unknown[];
+  description: string;
+  end: string;
+  projectId: string;
+  start: string;
+  tagIds?: string[];
+  taskId?: string;
+  type: "REGULAR";
+}
+
 // interface of json structure that will be written to file on login attempts
 interface UserData {
   projects: ProjectList;
   api: string;
   userProfile: UserProfile;
-  timer: Timer;
+  timer: TimeEntryRequest;
 }
 
 interface ReqOptions {
@@ -46,12 +59,20 @@ const genReqOptions = (apiKey: string): ReqOptions => {
   };
 };
 
-const genPostReqOptions = (apiKey: string): ReqOptions => {
+interface PostReqOptions {
+  method: string;
+  headers: HeadersInit;
+  body: string;
+}
+
+const genPostReqOptions = (apiKey: string, data: string): PostReqOptions => {
   return {
     method: "POST",
     headers: {
       "X-Api-Key": apiKey,
+      "Content-Type": "application/json",
     },
+    body: data,
   };
 };
 
@@ -71,4 +92,12 @@ const clockifyResponse = async (
 };
 
 export { clockifyResponse, genReqOptions, genPostReqOptions };
-export type { UserProfile, UserData, ApiInvalid, Project, ProjectList, Timer };
+export type {
+  UserProfile,
+  UserData,
+  ApiInvalid,
+  Project,
+  ProjectList,
+  Timer,
+  TimeEntryRequest,
+};
