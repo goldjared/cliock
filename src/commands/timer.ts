@@ -41,11 +41,11 @@ const getUTCTimeNow = (): string => {
   let seconds: string = date.getUTCSeconds().toString();
 
   // yyyy-MM-ddThh:mm:ssZ
-  if(month.length < 2) month = "0" + month;
-  if(day.length < 2) day = "0" + day;
-  if(hours.length < 2) hours = "0" + hours;
-  if(minutes.length < 2) minutes = "0" + minutes;
-  if(seconds.length < 2) seconds = "0" + seconds;
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
+  if (hours.length < 2) hours = "0" + hours;
+  if (minutes.length < 2) minutes = "0" + minutes;
+  if (seconds.length < 2) seconds = "0" + seconds;
   return (
     year +
     "-" +
@@ -62,7 +62,7 @@ const getUTCTimeNow = (): string => {
   );
 };
 
-const start = (projectName: string, projectId: string): void => {
+const start = (projectId: string): void => {
   const data = readData();
   if (data === "") {
     console.log("No saved data found. Creating file...");
@@ -72,20 +72,16 @@ const start = (projectName: string, projectId: string): void => {
   const userData: string = data;
   const userDataJson: UserData = JSON.parse(userData);
 
-  userDataJson.timer = {
-    projectId,
-    projectName,
-    start: getUTCTimeNow(),
-    end: "",
-  };
+  userDataJson.timer.projectId = projectId;
+  userDataJson.timer.start = getUTCTimeNow();
+
   writeData(JSON.stringify(userDataJson));
-  console.log("file rewritten with timer start, end reset!");
 };
 
 const isTimerRunning = (): boolean => {
   const data = readData();
   if (data === "") {
-    console.log("No saved data found. Creating file...");
+    console.log("No saved data found.");
     return false;
   }
   const userData: string = data;
@@ -96,7 +92,7 @@ const isTimerRunning = (): boolean => {
 const stop = (): void => {
   const data = readData();
   if (data === "") {
-    console.log("No saved data found. Creating file...");
+    console.log("No saved data found.");
     return;
   }
   const userData: string = data;
@@ -108,10 +104,12 @@ const stop = (): void => {
   );
 
   // send with URL link, and req options made with API.
-  clockifyResponse(workspaceTimeUrl, genPostReqOptions(userDataJson.api))
+  clockifyResponse(
+    workspaceTimeUrl,
+    genPostReqOptions(userDataJson.api, JSON.stringify(userDataJson.timer))
+  )
     .then((data) => {
-      console.log(`Suxcess.`);
-      console.log(data);
+      console.log(`Success, time stopped and posted.`);
     })
     .catch((error) => {
       // Handle any errors that occurred during the execution
@@ -121,7 +119,6 @@ const stop = (): void => {
   userDataJson.timer.start = "";
   userDataJson.timer.end = "";
   writeData(JSON.stringify(userDataJson));
-  console.log("file rewritten with timer start, end reset!");
 };
 
 export { getProjectId, start, stop, isTimerRunning };
