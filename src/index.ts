@@ -14,6 +14,5 @@ fs.readFile(homeDir + "/.cliock", "utf8", (err: unknown, data: string) => {
     return;
   }
 
-  const userData: string = data;
-  processor(userData);
+  processor(data);
 });
