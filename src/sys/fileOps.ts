@@ -15,17 +15,8 @@ const writeData = (content: string): boolean => {
 };
 
 const readData = (): string => {
-  //   fs.readFile(homeDir + "/.cliock", "utf8", (err: unknown, data: string) => {
-  //     if (err) {
-  //       console.log("Read error.");
-  //       return;
-  //     }
-  //     return data;
-  //  });
-
   try {
     const data = fs.readFileSync(homeDir + "/.cliock", "utf8");
-    console.log(data);
     return data;
   } catch (err) {
     console.error(err);
