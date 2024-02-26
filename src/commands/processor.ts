@@ -7,6 +7,7 @@ import type {
   UserData,
 } from "../clockifyApi/validation";
 import { getProjectId, isTimerRunning, start, stop } from "./timer";
+import { listProjects } from "./list";
 
 const processor = (userData: string): void => {
   // check if userData (.cliock file) is not empty
@@ -23,7 +24,7 @@ const processor = (userData: string): void => {
     userProfile = userDataJson.userProfile;
     // console.log(userProfile);
     userCurrentWorkspaceProjects = userDataJson.projects;
-    console.log(userCurrentWorkspaceProjects);
+    // console.log(userCurrentWorkspaceProjects);
   }
 
   if (argv[2] === undefined) {
@@ -57,8 +58,9 @@ const processor = (userData: string): void => {
       return;
     }
     stop();
-    const projectName: string = inputArr.join(" ");
-    console.log("Timer stopped on project: '" + projectName + "'");
+    console.log("Timer stopped");
+  } else if (command === "list") {
+    inputArr[0] !== undefined ? listProjects(inputArr[0]) : listProjects();
   }
 };
 
