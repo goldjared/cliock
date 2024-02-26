@@ -41,6 +41,10 @@ const commandData: CommandData[] = [
     key: "help",
     value: ["insert help msg", 2],
   },
+  {
+    key: "list",
+    value: ["List projects on current workspace", 1],
+  },
 ];
 
 // map of valid commands created by mapping the above array.
