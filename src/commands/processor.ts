@@ -7,7 +7,7 @@ import type {
   UserData,
 } from "../clockifyApi/validationTypes";
 import { getProjectId, isTimerRunning, start, stop } from "./timer";
-import { listProjects } from "./list";
+import { listProjectAtIndex, listProjects } from "./list";
 
 const processor = (userData: string): void => {
   // check if userData (.cliock file) is not empty
@@ -60,7 +60,9 @@ const processor = (userData: string): void => {
     stop();
     console.log("Timer stopped");
   } else if (command === "list") {
-    inputArr[0] !== undefined ? listProjects(inputArr[0]) : listProjects();
+    inputArr[0] !== undefined
+      ? listProjectAtIndex(inputArr[0])
+      : listProjects();
   }
 };
 
