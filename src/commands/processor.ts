@@ -5,7 +5,7 @@ import type {
   ProjectList,
   UserProfile,
   UserData,
-} from "../clockifyApi/validation";
+} from "../clockifyApi/validationTypes";
 import { getProjectId, isTimerRunning, start, stop } from "./timer";
 import { listProjects } from "./list";
 

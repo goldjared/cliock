@@ -1,10 +1,6 @@
 import { readData, writeData } from "../sys/fileOps";
-import {
-  clockifyResponse,
-  genPostReqOptions,
-  type UserData,
-  type ProjectList,
-} from "../clockifyApi/validation";
+import type { UserData, ProjectList } from "../clockifyApi/validationTypes";
+import { clockifyResponse, genPostReqOptions } from "../clockifyApi/validation";
 
 const getWorkspaceTimeUrl = (wrkspcId: string): string =>
   `https://api.clockify.me/api/v1/workspaces/${wrkspcId}/time-entries`;
