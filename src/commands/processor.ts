@@ -11,21 +11,6 @@ import { listProjectAtIndex, listProjects } from "./list";
 
 const processor = (userData: string): void => {
   // check if userData (.cliock file) is not empty
-  let userDataJson: UserData;
-  let api: string;
-  let userProfile: UserProfile;
-  let userCurrentWorkspaceProjects: ProjectList;
-  if (userData !== "") {
-    // convert string into json obj
-    userDataJson = JSON.parse(userData);
-
-    api = userDataJson.api;
-    // console.log(api)
-    userProfile = userDataJson.userProfile;
-    // console.log(userProfile);
-    userCurrentWorkspaceProjects = userDataJson.projects;
-    // console.log(userCurrentWorkspaceProjects);
-  }
 
   if (argv[2] === undefined) {
     console.log("No command input. Type 'iok help'");
@@ -39,16 +24,36 @@ const processor = (userData: string): void => {
   }
 
   const inputArr: string[] = argv.slice(3);
+
   if (command === "login") {
+    if (inputArr.length < 1) {
+      console.log("Input invalid. Type 'iok help login'");
+      return;
+    }
     login(inputArr[0]);
-  } else if (command === "start") {
+    return;
+  }
+  // check if command was not login and user is not logged in
+  if (userData === "") {
+    console.log("No local data found. Type 'iok help login'");
+    return;
+  }
+
+  const userDataJson: UserData = JSON.parse(userData);
+  const api: string = userDataJson.api;
+  const userProfile: UserProfile = userDataJson.userProfile;
+  const userCurrentWorkspaceProjects: ProjectList = userDataJson.projects;
+
+  if (command === "start") {
     const projectName: string = inputArr.join(" ");
 
     // will either be projectID or blank string
     const projectId: string = getProjectId(projectName);
 
     if (projectId === "") {
-      console.log(`Invalid project name '${projectName}'. Exiting`);
+      console.log(
+        `Invalid project name '${projectName}', input is case sensitive. Exiting`
+      );
     }
     start(projectId);
     console.log("Timer started on project: '" + projectName + "'");
@@ -61,8 +66,8 @@ const processor = (userData: string): void => {
     console.log("Timer stopped");
   } else if (command === "list") {
     inputArr[0] !== undefined
-      ? listProjectAtIndex(inputArr[0])
-      : listProjects();
+      ? listProjectAtIndex(inputArr[0], userDataJson)
+      : listProjects(userDataJson);
   }
 };
 
