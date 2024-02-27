@@ -6,7 +6,7 @@ import type {
   Project,
   ProjectList,
   UserData,
-} from "../clockifyApi/validation";
+} from "../clockifyApi/validationTypes";
 
 const userUrl: string = "https://api.clockify.me/api/v1/user";
 const getWorkspaceProjectsUrl = (wrkspcId: string): string =>
