@@ -1,54 +1,11 @@
-interface ApiInvalid {
-  message: string;
-  code: number;
-}
-
-interface UserProfile {
-  id: string;
-  name: string;
-  activeWorkspace: string;
-  defaultWorkspace: string;
-}
-
-interface Project {
-  id: string;
-  name: string;
-  workspaceId: string;
-}
-interface ProjectList extends Array<Project> {}
-
-interface Timer {
-  projectId: string;
-  projectName: string;
-  start: string;
-  end: string;
-}
-
-interface TimeEntryRequest {
-  billable: boolean;
-  customAttributes?: unknown[];
-  customFields?: unknown[];
-  description: string;
-  end: string;
-  projectId: string;
-  start: string;
-  tagIds?: string[];
-  taskId?: string;
-  type: "REGULAR";
-}
-
-// interface of json structure that will be written to file on login attempts
-interface UserData {
-  projects: ProjectList;
-  api: string;
-  userProfile: UserProfile;
-  timer: TimeEntryRequest;
-}
-
-interface ReqOptions {
-  method: string;
-  headers: HeadersInit;
-}
+import type {
+  UserProfile,
+  ApiInvalid,
+  Project,
+  ProjectList,
+  ReqOptions,
+  PostReqOptions,
+} from "./validationTypes";
 
 const genReqOptions = (apiKey: string): ReqOptions => {
   return {
@@ -58,12 +15,6 @@ const genReqOptions = (apiKey: string): ReqOptions => {
     },
   };
 };
-
-interface PostReqOptions {
-  method: string;
-  headers: HeadersInit;
-  body: string;
-}
 
 const genPostReqOptions = (apiKey: string, data: string): PostReqOptions => {
   return {
@@ -92,12 +43,3 @@ const clockifyResponse = async (
 };
 
 export { clockifyResponse, genReqOptions, genPostReqOptions };
-export type {
-  UserProfile,
-  UserData,
-  ApiInvalid,
-  Project,
-  ProjectList,
-  Timer,
-  TimeEntryRequest,
-};

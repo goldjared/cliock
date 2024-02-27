@@ -1,4 +1,4 @@
-import type { ProjectList } from "../clockifyApi/validation";
+import type { ProjectList } from "../clockifyApi/validationTypes";
 import { readData } from "../sys/fileOps";
 
 const listProjects = (index: string | undefined = undefined): void => {
