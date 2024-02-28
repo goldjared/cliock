@@ -11,7 +11,6 @@ import { listProjectAtIndex, listProjects } from "./list";
 
 const processor = (userData: string): void => {
   // check if userData (.cliock file) is not empty
-
   if (argv[2] === undefined) {
     console.log("No command input. Type 'iok help'");
     return;
@@ -48,11 +47,11 @@ const processor = (userData: string): void => {
     const projectName: string = inputArr.join(" ");
 
     // will either be projectID or blank string
-    const projectId: string = getProjectId(projectName);
+    const projectId: string = getProjectId(projectName, userCurrentWorkspaceProjects);
 
     if (projectId === "") {
       console.log(
-        `Invalid project name '${projectName}', input is case sensitive. Exiting`
+        `Invalid project name '${projectName}', *NOTE* input is case sensitive. Exiting`
       );
     } else {
       start(projectId);
