@@ -54,9 +54,10 @@ const processor = (userData: string): void => {
       console.log(
         `Invalid project name '${projectName}', input is case sensitive. Exiting`
       );
+    } else {
+      start(projectId);
+      console.log("Timer started on project: '" + projectName + "'");
     }
-    start(projectId);
-    console.log("Timer started on project: '" + projectName + "'");
   } else if (command === "stop") {
     if (!isTimerRunning()) {
       console.log("No timer currently running. Exiting");
