@@ -5,17 +5,7 @@ import { clockifyResponse, genPostReqOptions } from "../clockifyApi/validation";
 const getWorkspaceTimeUrl = (wrkspcId: string): string =>
   `https://api.clockify.me/api/v1/workspaces/${wrkspcId}/time-entries`;
 
-const getProjectId = (projectName: string): string => {
-  const data = readData();
-  if (data === "") {
-    console.log("No saved data found. Creating file...");
-    return "";
-  }
-
-  const userData: string = data;
-  const userDataJson: UserData = JSON.parse(userData);
-
-  const projList: ProjectList = userDataJson.projects;
+const getProjectId = (projectName: string, projList: ProjectList): string => {
   const projListLength: number = Object.keys(projList).length;
 
   // iterate through project list, return proj ID if name param exists in projList
