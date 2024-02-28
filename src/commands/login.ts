@@ -72,14 +72,13 @@ const login = (apiKey: string): void => {
             console.error("Error:", error);
           });
       } else {
-        console.log("Failed to get projects on workspace");
+        console.log("API key entered is invalid");
       }
     })
     .catch((error) => {
       // Handle any errors that occurred during the execution
       console.error("Error:", error);
     });
-  // end userProfile fetch
 };
 
 export { login };
