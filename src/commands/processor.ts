@@ -47,7 +47,10 @@ const processor = (userData: string): void => {
     const projectName: string = inputArr.join(" ");
 
     // will either be projectID or blank string
-    const projectId: string = getProjectId(projectName, userCurrentWorkspaceProjects);
+    const projectId: string = getProjectId(
+      projectName,
+      userCurrentWorkspaceProjects
+    );
 
     if (projectId === "") {
       console.log(
