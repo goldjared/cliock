@@ -56,6 +56,13 @@ interface PostReqOptions {
   body: string;
 }
 
+interface PostedTimeResponse {
+  projectId: string;
+  timeInterval: {
+    duration: string;
+  };
+}
+
 export type {
   UserProfile,
   UserData,
@@ -66,4 +73,5 @@ export type {
   TimeEntryRequest,
   ReqOptions,
   PostReqOptions,
+  PostedTimeResponse,
 };
