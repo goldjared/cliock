@@ -67,7 +67,8 @@ const processor = (userData: string): void => {
       return;
     }
     stop();
-    console.log("Timer stopped");
+    const projectName: string = inputArr.join(" ");
+    console.log("Timer stopped on project: '" + projectName + "'");
   } else if (command === "list") {
     inputArr[0] !== undefined
       ? listProjectAtIndex(inputArr[0], userDataJson)
