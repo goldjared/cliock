@@ -1,6 +1,11 @@
 import { readData, writeData } from "../sys/fileOps";
-import type { UserData, ProjectList } from "../clockifyApi/validationTypes";
+import type {
+  UserData,
+  ProjectList,
+  PostedTimeResponse,
+} from "../clockifyApi/validationTypes";
 import { clockifyResponse, genPostReqOptions } from "../clockifyApi/validation";
+import { parseTimeDuration } from "./timerUtil";
 
 const getWorkspaceTimeUrl = (wrkspcId: string): string =>
   `https://api.clockify.me/api/v1/workspaces/${wrkspcId}/time-entries`;
@@ -95,7 +100,20 @@ const stop = (): void => {
     genPostReqOptions(userDataJson.api, JSON.stringify(userDataJson.timer))
   )
     .then((data) => {
-      console.log(`Success, time stopped and posted.`);
+      console.log(data);
+      if ("projectId" in data && "timeInterval" in data) {
+        const postedTimeResp: PostedTimeResponse = {
+          projectId: data.projectId,
+          timeInterval: {
+            duration: data.timeInterval.duration,
+          },
+        };
+        const timeDuration: string = parseTimeDuration(
+          postedTimeResp.timeInterval.duration
+        );
+        console.log(`Time entry successfully posted to Clockify`);
+        console.log("Duration: " + timeDuration);
+      }
     })
     .catch((error) => {
       // Handle any errors that occurred during the execution
