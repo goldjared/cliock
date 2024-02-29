@@ -5,6 +5,7 @@ import type {
   ProjectList,
   ReqOptions,
   PostReqOptions,
+  PostedTimeResponse,
 } from "./validationTypes";
 
 const genReqOptions = (apiKey: string): ReqOptions => {
@@ -30,7 +31,9 @@ const genPostReqOptions = (apiKey: string, data: string): PostReqOptions => {
 const clockifyResponse = async (
   url: string,
   reqOptions: ReqOptions | PostReqOptions
-): Promise<ApiInvalid | UserProfile | Project | ProjectList> => {
+): Promise<
+  ApiInvalid | UserProfile | Project | ProjectList | PostedTimeResponse
+> => {
   try {
     const response = await fetch(url, reqOptions);
     const data = await response.json();
