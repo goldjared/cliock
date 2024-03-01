@@ -9,6 +9,7 @@ const parseTimeDuration = (durationTimeToParse: string): string => {
   let passedSeconds: string = "";
   let passedMinutes: string = "";
   let passedHours: string = "";
+  // i might need to be i>=0 since indice 0? *************
   for (let i = durationTimeToParseLeng - 1; i > 0; i--) {
     const currentChar: string = durationTimeToParse.charAt(i);
     if (currentChar === "T") break;

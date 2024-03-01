@@ -39,6 +39,7 @@ const login = (apiKey: string): void => {
             userProfile,
             // set empty timer to userData.timer
             timer: {
+              projectName: "",
               billable: false,
               customAttributes: [],
               customFields: [],
