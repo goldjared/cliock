@@ -17,14 +17,8 @@ interface Project {
 }
 interface ProjectList extends Array<Project> {}
 
-interface Timer {
-  projectId: string;
-  projectName: string;
-  start: string;
-  end: string;
-}
-
 interface TimeEntryRequest {
+  projectName: string;
   billable: boolean;
   customAttributes?: unknown[];
   customFields?: unknown[];
@@ -69,7 +63,6 @@ export type {
   ApiInvalid,
   Project,
   ProjectList,
-  Timer,
   TimeEntryRequest,
   ReqOptions,
   PostReqOptions,
