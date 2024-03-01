@@ -54,13 +54,16 @@ const processor = (userData: string): void => {
       userCurrentWorkspaceProjects
     );
 
-    if (projectId === "") {
+    // name.length > 0 to account for an omitted project name, in the event user wants to use a // saved project on file
+    if (projectId === "" && projectName.length > 0) {
       console.log(
         `Invalid project name '${projectName}', *NOTE* input is case sensitive. Exiting`
       );
     } else {
-      start(projectId, projectName);
-      console.log("Timer started on project: '" + projectName + "'");
+      // if omitted name, attempt start w/o values. if name present, attempt start with values
+      projectName === "" && projectId === ""
+        ? start()
+        : start(projectId, projectName);
     }
   } else if (command === "stop") {
     if (!isTimerRunning()) {

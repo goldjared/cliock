@@ -10,7 +10,7 @@ import {
   getUTCTimeNow,
 } from "./util/timerUtil";
 
-const start = (projectId: string, projectName: string): void => {
+const start = (projectId?: string, projectName?: string): void => {
   const data = readData();
   if (data === "") {
     console.log("No saved data found. Creating file...");
@@ -19,10 +19,27 @@ const start = (projectId: string, projectName: string): void => {
 
   const userData: string = data;
   const userDataJson: UserData = JSON.parse(userData);
+  if (
+    projectId === undefined &&
+    projectName === undefined &&
+    (userDataJson.timer.projectName === "" ||
+      userDataJson.timer.projectId === "")
+  ) {
+    console.log(
+      "Project name was omitted, HOWEVER, no current project found saved. Exiting"
+    );
+    return;
+  }
 
-  userDataJson.timer.projectId = projectId;
-  userDataJson.timer.projectName = projectName;
+  if (projectId !== undefined && projectName !== undefined) {
+    userDataJson.timer.projectId = projectId;
+    userDataJson.timer.projectName = projectName;
+  }
   userDataJson.timer.start = getUTCTimeNow();
+
+  console.log(
+    "Timer started on project: '" + userDataJson.timer.projectName + "'"
+  );
 
   writeData(JSON.stringify(userDataJson));
 };
