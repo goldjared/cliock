@@ -1,6 +1,4 @@
-import type {
-  ProjectList,
-} from "../../clockifyApi/validationTypes";
+import type { ProjectList } from "../../clockifyApi/validationTypes";
 
 const parseTimeDuration = (durationTimeToParse: string): string => {
   // parameter string example: PT4M33S
