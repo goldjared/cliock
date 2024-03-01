@@ -6,7 +6,7 @@ const help = (helpCmd: string): void => {
     console.log("Note '?' means optional value");
     console.log("---------------------------------------------------");
     for (const [key, value] of validCmds) {
-      console.log("<" + key + ">: " + value[0]);
+      console.log(key + ": " + value[0]);
       console.log(value[1]);
       console.log();
     }
@@ -14,12 +14,13 @@ const help = (helpCmd: string): void => {
   }
 
   if (isValid(helpCmd)) {
-    const cmdDataArr: [string, string] | undefined = validCmds.get(helpCmd);
+    const cmdDataArr: string[] | undefined = validCmds.get(helpCmd);
     if (cmdDataArr !== undefined) {
       console.log("Help for '" + helpCmd + "':");
-      console.log(cmdDataArr[0]);
-      console.log();
-      console.log(cmdDataArr[1]);
+      for (let i = 1; i < cmdDataArr.length; i++) {
+        console.log(cmdDataArr[i]);
+        console.log();
+      }
     }
   }
 };
