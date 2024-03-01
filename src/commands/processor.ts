@@ -59,7 +59,7 @@ const processor = (userData: string): void => {
         `Invalid project name '${projectName}', *NOTE* input is case sensitive. Exiting`
       );
     } else {
-      start(projectId);
+      start(projectId, projectName);
       console.log("Timer started on project: '" + projectName + "'");
     }
   } else if (command === "stop") {
@@ -68,8 +68,6 @@ const processor = (userData: string): void => {
       return;
     }
     stop();
-    const projectName: string = inputArr.join(" ");
-    console.log("Timer stopped on project: '" + projectName + "'");
   } else if (command === "list") {
     inputArr[0] !== undefined
       ? listProjectAtIndex(inputArr[0], userDataJson)

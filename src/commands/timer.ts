@@ -10,7 +10,7 @@ import {
   getUTCTimeNow,
 } from "./util/timerUtil";
 
-const start = (projectId: string): void => {
+const start = (projectId: string, projectName: string): void => {
   const data = readData();
   if (data === "") {
     console.log("No saved data found. Creating file...");
@@ -21,6 +21,7 @@ const start = (projectId: string): void => {
   const userDataJson: UserData = JSON.parse(userData);
 
   userDataJson.timer.projectId = projectId;
+  userDataJson.timer.projectName = projectName;
   userDataJson.timer.start = getUTCTimeNow();
 
   writeData(JSON.stringify(userDataJson));
@@ -57,7 +58,6 @@ const stop = (): void => {
     genPostReqOptions(userDataJson.api, JSON.stringify(userDataJson.timer))
   )
     .then((data) => {
-      console.log(data);
       if ("projectId" in data && "timeInterval" in data) {
         const postedTimeResp: PostedTimeResponse = {
           projectId: data.projectId,
@@ -68,6 +68,8 @@ const stop = (): void => {
         const timeDuration: string = parseTimeDuration(
           postedTimeResp.timeInterval.duration
         );
+        const projectName = userDataJson.timer.projectName;
+        console.log("Timer stopped on project '" + projectName + "'");
         console.log(`Time entry successfully posted to Clockify`);
         console.log("Duration: " + timeDuration);
       }
