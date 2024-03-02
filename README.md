@@ -1,5 +1,5 @@
 # cliock
-## Simple CLI for Clockify.
+Simple CLI for Clockify.
 
 ### about
 Cliock is a CLI available for easy installation on Linux and MacOS via NPM. The purpose of Cliock is to streamline time tracking via the command line. Rather than navigating Clockify's web app, a simple command can be executed for the core tasks.
