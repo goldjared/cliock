@@ -29,7 +29,8 @@ const displayProjectHeader = (
     userData.activeWorkspace,
     "Projects: " + projListLeng
   );
-  console.log("---------------------------------------------");
+  console.log("____________________________________________________________");
+  console.log();
 };
 
 // ternary for display w/ or w/o prefix
