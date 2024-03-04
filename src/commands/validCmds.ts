@@ -14,7 +14,7 @@ const commandData: CommandData[] = [
   {
     key: "start",
     value: [
-      "Starts the timer for selected project , get project names with 'iok list'",
+      "Starts the timer for selected project, get project names with 'iok list'",
       "$iok start <projectName?>",
       "projectName can be omitted to use most recently used project in Cliock, if you have not changed workspace",
       "e.g. $iok start",
