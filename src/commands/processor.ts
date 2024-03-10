@@ -62,7 +62,7 @@ const processor = (userData: string): void => {
         `Invalid project name '${projectName}', *NOTE* input is case sensitive. Exiting`
       );
     } else {
-      // if a timer is already running, stop/post that timer before starting new timer
+      // if a timer is already running, prevent starting new timer until running is stopped
       if (isTimerRunning()) {
         console.log(
           "Timer currently running on '" +
