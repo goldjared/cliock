@@ -78,6 +78,8 @@ const processor = (userData: string): void => {
   } else if (command === "help") {
     const helpCmd: string = inputArr.join(" ");
     help(helpCmd);
+  } else if (command === "sync") {
+    login(api);
   }
 };
 

@@ -53,6 +53,13 @@ const commandData: CommandData[] = [
       "$iok list <indexValue?>",
     ],
   },
+  {
+    key: "sync",
+    value: [
+      "Sync local Cliock file with Clockify API to match upstream",
+      "$iok sync",
+    ],
+  },
 ];
 
 // map of valid commands created by mapping the above array.
