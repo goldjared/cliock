@@ -1,16 +1,21 @@
-# cliock
-Simple CLI for Clockify.
+# Cliock
+Cliock is a command-line interface (CLI) tool designed for efficient time tracking using Clockify. With easy installation on Linux and MacOS through NPM, Cliock simplifies the process of time tracking by eliminating the need to navigate Clockify's web app. Built with no production dependencies, it offers a lightweight solution for managing time-tracking tasks directly from the command line.
 
-### about
-Cliock is a CLI available for easy installation on Linux and MacOS via NPM. The purpose of Cliock is to streamline time tracking via the command line. Rather than navigating Clockify's web app, a simple command can be executed for the core tasks.
+## Installation
+To install Cliock globally on your system, use the following NPM command: $`npm install -g cliock`
 
-This CLI was bulit with zero production dependencies.
+Initially, you will obtain your API key from [Clockify](https://app.clockify.me/user/settings).
 
-### operations
-After installing, $`iok` is the core command to work with.
-$`iok help` Will display all available commands.
+## Operations
+Once installed, users can utilize the $`iok` command to interact with Cliock. Here are some key operations:
 
-Initially, you will login with your API key from [Clockify](https://app.clockify.me/user/settings) via $`iok login <API_key>`.
+**Login**: Begin by logging in with your Clockify API key obtained from Clockify using the following command:
+$`iok login <API_key>`
+
+**Help**: To display all available commands, use the following command:
+$`iok help`
+
+
 
 
 
