@@ -5,6 +5,7 @@ import type {
   ProjectList,
   UserProfile,
   UserData,
+  TimeEntryRequest,
 } from "../clockifyApi/validationTypes";
 import { isTimerRunning, start, stop } from "./timer";
 import { getProjectId } from "./util/timerUtil";
@@ -44,6 +45,7 @@ const processor = (userData: string): void => {
   const api: string = userDataJson.api;
   const userProfile: UserProfile = userDataJson.userProfile;
   const userCurrentWorkspaceProjects: ProjectList = userDataJson.projects;
+  const userTimer: TimeEntryRequest = userDataJson.timer;
 
   if (command === "start") {
     const projectName: string = inputArr.join(" ");
@@ -60,6 +62,15 @@ const processor = (userData: string): void => {
         `Invalid project name '${projectName}', *NOTE* input is case sensitive. Exiting`
       );
     } else {
+      // if a timer is already running, stop/post that timer before starting new timer
+      if (isTimerRunning()) {
+        console.log(
+          "Timer currently running on '" +
+            userTimer.projectName +
+            "'. Stop with 'iok stop'"
+        );
+        return;
+      }
       // if omitted name, attempt start w/o values. if name present, attempt start with values
       projectName === "" && projectId === ""
         ? start()
