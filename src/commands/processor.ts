@@ -37,6 +37,12 @@ const processor = (userData: string): void => {
   }
   // check if command was not login and user is not logged in
   if (userData === "") {
+    // account for empty file and user requesting help command
+    if (command === "help") {
+      const helpCmd: string = inputArr.join(" ");
+      help(helpCmd);
+      return;
+    }
     console.log("No local data found. Type 'iok help login'");
     return;
   }
