@@ -13,7 +13,6 @@ import { listProjectAtIndex, listProjects } from "./list";
 import { help } from "./help";
 
 const processor = (userData: string): void => {
-  // check if userData (.cliock file) is not empty
   if (argv[2] === undefined) {
     console.log("No command input. Type 'iok help'");
     return;
@@ -89,6 +88,7 @@ const processor = (userData: string): void => {
     }
     stop();
   } else if (command === "list") {
+    // If there is command parameter, list specific project. Else list all.
     inputArr[0] !== undefined
       ? listProjectAtIndex(inputArr[0], userDataJson)
       : listProjects(userDataJson);
@@ -96,6 +96,15 @@ const processor = (userData: string): void => {
     const helpCmd: string = inputArr.join(" ");
     help(helpCmd);
   } else if (command === "sync") {
+    if (isTimerRunning()) {
+      console.log(
+        "Timer currently running on '" +
+          userTimer.projectName +
+          "'. Stop with 'iok stop'"
+      );
+      console.log("Please stop timer before syncing with upstream. Exiting");
+      return;
+    }
     login(api);
   }
 };
