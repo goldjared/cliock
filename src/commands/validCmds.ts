@@ -19,6 +19,8 @@ const commandData: CommandData[] = [
       "projectName can be omitted to use most recently used project in Cliock, if you have not changed workspace",
       "e.g. $iok start",
       "Will start the timer on the last project the timer was started/stopped on in Cliock, if present",
+      "$iok start -- -n <indexValue>",
+      "Obtain index value from '$iok list'. Remove need to type proj name",
     ],
   },
   {

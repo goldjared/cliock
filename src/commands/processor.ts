@@ -53,7 +53,31 @@ const processor = (userData: string): void => {
   const userTimer: TimeEntryRequest = userDataJson.timer;
 
   if (command === "start") {
-    const projectName: string = inputArr.join(" ");
+    let projectName: string = "";
+    if (inputArr[0] === "-n") {
+      // check if input is number, if true, check if num is in range of projList
+      // change projName to name mapped to index val
+      // this allows for starting timer via client projList display index value
+      try {
+        if (!isNaN(+inputArr[1])) {
+          const projListIndex: number = Number(inputArr[1]);
+          if (
+            projListIndex <= Object.keys(userCurrentWorkspaceProjects).length &&
+            projListIndex > 0
+          ) {
+            projectName = userCurrentWorkspaceProjects[projListIndex - 1].name;
+          }
+        } else {
+          throw new Error();
+        }
+      } catch {
+        console.log("Index value invalid. See 'iok list'. Exiting");
+        return;
+      }
+    } else {
+      // else projName is cmd string input
+      projectName = inputArr.join(" ");
+    }
 
     // will either be projectID or blank string
     const projectId: string = getProjectId(
@@ -76,6 +100,7 @@ const processor = (userData: string): void => {
         );
         return;
       }
+
       // if omitted name, attempt start w/o values. if name present, attempt start with values
       projectName === "" && projectId === ""
         ? start()

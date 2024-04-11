@@ -29,6 +29,7 @@ const displayProjectHeader = (
     userData.activeWorkspace,
     "Projects: " + projListLeng
   );
+  console.log("See '$iok help start' for omitting project name on timer start");
   console.log("____________________________________________________________");
   console.log();
 };
