@@ -1,6 +1,6 @@
 {
   "name": "cliock",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "simple CLI for clockify",
   "main": "./bin/index.js",
   "scripts": {
