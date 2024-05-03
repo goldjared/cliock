@@ -11,6 +11,7 @@ import { isTimerRunning, start, stop } from "./timer";
 import { getProjectId } from "./util/timerUtil";
 import { listProjectAtIndex, listProjects } from "./list";
 import { help } from "./help";
+import { info } from "./info";
 
 const processor = (userData: string): void => {
   if (argv[2] === undefined) {
@@ -131,6 +132,8 @@ const processor = (userData: string): void => {
       return;
     }
     login(api);
+  } else if (command === "info") {
+    info();
   }
 };
 
