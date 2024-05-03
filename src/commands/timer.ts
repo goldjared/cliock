@@ -47,7 +47,6 @@ const start = (projectId?: string, projectName?: string): void => {
 const isTimerRunning = (): boolean => {
   const data = readData();
   if (data === "") {
-    console.log("No saved data found.");
     return false;
   }
   const userData: string = data;
