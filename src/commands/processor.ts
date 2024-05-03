@@ -54,13 +54,13 @@ const processor = (userData: string): void => {
 
   if (command === "start") {
     let projectName: string = "";
-    if (inputArr[0] === "-n") {
+    if (inputArr[1] === "-n") {
       // check if input is number, if true, check if num is in range of projList
       // change projName to name mapped to index val
       // this allows for starting timer via client projList display index value
       try {
-        if (!isNaN(+inputArr[1])) {
-          const projListIndex: number = Number(inputArr[1]);
+        if (!isNaN(+inputArr[2])) {
+          const projListIndex: number = Number(inputArr[2]);
           if (
             projListIndex <= Object.keys(userCurrentWorkspaceProjects).length &&
             projListIndex > 0
