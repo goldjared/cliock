@@ -2,14 +2,13 @@ import type { ProjectList } from "../../clockifyApi/validationTypes";
 
 const parseTimeDuration = (durationTimeToParse: string): string => {
   // parameter string example: PT4M33S
-
   const durationTimeToParseLeng: number = durationTimeToParse.length;
-
   let workingSectionChar: string = "";
   let passedSeconds: string = "";
   let passedMinutes: string = "";
   let passedHours: string = "";
-  // i might need to be i>=0 since indice 0? *************
+
+  // iterate through string param right to left, breaks on 'T' for end of useful values
   for (let i = durationTimeToParseLeng - 1; i > 0; i--) {
     const currentChar: string = durationTimeToParse.charAt(i);
     if (currentChar === "T") break;
@@ -27,17 +26,10 @@ const parseTimeDuration = (durationTimeToParse: string): string => {
     if (workingSectionChar === "H") passedHours = currentChar + passedHours;
   }
 
-  passedSeconds.length < 2 && passedSeconds.length >= 1
-    ? (passedSeconds = 0 + passedSeconds)
-    : (passedSeconds = "00");
-
-  passedMinutes.length < 2 && passedMinutes.length >= 1
-    ? (passedMinutes = 0 + passedMinutes)
-    : (passedMinutes = "00");
-
-  passedHours.length < 2 && passedHours.length >= 1
-    ? (passedHours = 0 + passedHours)
-    : (passedHours = "00");
+  // finalize time values with prefix 0's or 00 in case of empty string
+  passedSeconds = parseTimeWithZeros(passedSeconds);
+  passedMinutes = parseTimeWithZeros(passedMinutes);
+  passedHours = parseTimeWithZeros(passedHours);
 
   return passedHours + ":" + passedMinutes + ":" + passedSeconds;
 };
@@ -86,6 +78,16 @@ const getUTCTimeNow = (): string => {
     seconds +
     "Z"
   );
+};
+
+const parseTimeWithZeros = (timeValue: string): string => {
+  if (timeValue.length < 2 && timeValue.length >= 1) {
+    timeValue = "0" + timeValue;
+  } else if (timeValue.length === 0) {
+    timeValue = "00";
+  }
+
+  return timeValue;
 };
 
 export { parseTimeDuration, getProjectId, getUTCTimeNow, getWorkspaceTimeUrl };
