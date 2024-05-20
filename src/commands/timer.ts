@@ -100,4 +100,24 @@ const stop = (): void => {
   writeData(JSON.stringify(userDataJson));
 };
 
-export { start, stop, isTimerRunning };
+const reset = (): void => {
+  const data = readData();
+  if (data === "") {
+    console.log("No saved data found.");
+    return;
+  }
+  if (!isTimerRunning()) {
+    console.log("No timer running. Exiting");
+    return;
+  }
+  const userData: string = data;
+  const userDataJson: UserData = JSON.parse(userData);
+  userDataJson.timer.start = "";
+  const projectName = userDataJson.timer.projectName;
+  console.log("Timer reset on project '" + projectName + "'");
+  console.log(`Time entry NOT posted to Clockify`);
+
+  writeData(JSON.stringify(userDataJson));
+};
+
+export { start, stop, reset, isTimerRunning };

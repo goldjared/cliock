@@ -7,7 +7,7 @@ import type {
   UserData,
   TimeEntryRequest,
 } from "../clockifyApi/validationTypes";
-import { isTimerRunning, start, stop } from "./timer";
+import { isTimerRunning, reset, start, stop } from "./timer";
 import { getProjectId } from "./util/timerUtil";
 import { listProjectAtIndex, listProjects } from "./list";
 import { help } from "./help";
@@ -134,6 +134,8 @@ const processor = (userData: string): void => {
     login(api);
   } else if (command === "info") {
     info();
+  } else if (command === "reset") {
+    reset();
   }
 };
 

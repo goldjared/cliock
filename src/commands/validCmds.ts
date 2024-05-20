@@ -31,6 +31,13 @@ const commandData: CommandData[] = [
     ],
   },
   {
+    key: "reset",
+    value: [
+      "Resets timer for the currently running timer. No time posted to Clockify. If no timer is running, returns no timer running",
+      "$iok reset",
+    ],
+  },
+  {
     key: "info",
     value: [
       "Displays information about the current selected project and session",
